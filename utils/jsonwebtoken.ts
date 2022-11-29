@@ -14,5 +14,4 @@ export function verify(
   token: string
 ) {
   return jsonwebtoken.verify(token, process.env.SECRET!.toString())
-
 }
