@@ -2,7 +2,7 @@ import useSWR from 'swr'
 import fetcher from '../utils/fetcher'
 
 export default function Home() {
-  const { data, error } = useSWR('', fetcher)
+  const { data, error } = useSWR('/api/session', fetcher)
   
   return (
     <></>
