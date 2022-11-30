@@ -15,3 +15,26 @@ export function verify(
 ) {
   return jsonwebtoken.verify(token, process.env.SECRET!.toString())
 }
+
+export function check(
+  token: string
+) {
+  try {
+    if (token) {
+      if (verify(token)) {
+        return {
+          status: true,
+          msg: ""
+        }
+      }
+      else throw("로그인이 필요한 서비스 입니다.")
+    } else {
+      throw("로그인이 필요한 서비스 입니다.");
+    }
+  } catch (e) {
+    return {
+      status: false,
+      msg: e
+    }
+  }
+}

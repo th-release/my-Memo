@@ -1,21 +1,26 @@
+import { check, verify } from '../../utils/jsonwebtoken';
 import type { NextApiRequest, NextApiResponse } from 'next'
+
+interface Data {
+  status: boolean,
+  msg: string | unknown
+}
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse<Data>
 ) {
   const { session } = req.cookies
-
-  try {
-    if (session) {
-      
-    } else {
-      throw("로그인이 필요한 서비스 입니다.");
-    }
-  } catch (e) {
+  const result = check(session!.toString());
+  if (!result.status) {
     return res.send({
-      status: false,
-      msg: e
-    });
+      status: result.status,
+      msg: result.msg
+    })
+  } else {
+    return res.send({
+      status: result.status,
+      msg: result.msg
+    })
   }
 }
