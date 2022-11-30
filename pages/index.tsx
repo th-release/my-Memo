@@ -15,6 +15,5 @@ export default function Home() {
     if (!data.status) router.push('/account/login?path=/')
     else router.push("/panel/")
     return <></>
-    
   }
 }
